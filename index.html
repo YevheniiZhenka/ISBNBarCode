@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<body>
+
+  <div id="app">
+    <h1>ISBN13 BarCode</h1>
+    <div>
+      Input ISBN:<input type="number" v-model="isbn" @change="onChangeInput" />
+    </div>
+    <div>
+      Result ISBN13: <span>{{completeISBN}}</span>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        isbn: '',
+        completeISBN: ''
+      },
+      methods: {
+        calculateISBN() {
+          const isbn = "" + this.isbn
+          let isOdd = true
+          let sum = 0
+          for (const ch of isbn) {
+            if (isOdd) {
+              sum += +ch
+            } else {
+              sum += +ch * 3
+            }
+            isOdd = !isOdd
+          }
+          this.completeISBN = 10 - (sum % 10)
+        },
+        onChangeInput(e) {
+          this.calculateISBN()
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
