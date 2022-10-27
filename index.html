@@ -34,7 +34,7 @@
             }
             isOdd = !isOdd
           }
-          this.completeISBN = 10 - (sum % 10)
+          this.completeISBN = this.isbn + (10 - (sum % 10))
         },
         onChangeInput(e) {
           this.calculateISBN()
